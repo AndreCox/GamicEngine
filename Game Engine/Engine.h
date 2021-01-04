@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Window.h"
+#include "Renderer.h"
 #include <SFML/Window.hpp>
 
 class Engine;
@@ -16,7 +16,7 @@ private:
 	// Starts a clock to track the time the engine has been running
 	sf::Clock engineClock;
 
-	Window* window;
+	Renderer* renderer;
 
 public:
 	Engine();

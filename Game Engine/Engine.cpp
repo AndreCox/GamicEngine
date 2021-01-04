@@ -8,13 +8,13 @@
 Engine::Engine()
 {
 	// Sets default values
-	window = nullptr;
+	renderer = nullptr;
 	bHasBeenPreviouslyInitialized = false;
 }
 
 Engine::~Engine()
 {
-	delete window;
+	delete renderer;
 }
 
 void Engine::Init()
@@ -30,8 +30,8 @@ void Engine::Init()
 	//::ShowWindow(::GetConsoleWindow(), SW_HIDE);
 
 	// Instantiate a Window class
-	if (window == nullptr)
-		window = new Window{};
+	if (renderer == nullptr)
+		renderer = new Renderer{};
 
 
 	// Start the engine 
@@ -51,7 +51,7 @@ void Engine::Init()
 void Engine::Tick(float elapsedTime)
 {
 	// Call tick on the window subframework
-	window->Tick(elapsedTime);
+	renderer->Tick(elapsedTime);
 }
 
 void Engine::Exit()

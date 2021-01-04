@@ -11,22 +11,22 @@
 ////////////////////////////////////////////////////////////
 
 
-static Engine* myEngine;
+static Engine* engine;
 
 Engine* GetEngine()
 {
-	return myEngine;
+	return engine;
 }
 
 int main()
 {
 	spdlog::info("TEST");
 
-	if (myEngine == nullptr)
-		myEngine = { new Engine };
+	if (engine == nullptr)
+		engine = { new Engine };
 
-	myEngine->Init();
+	engine->Init();
 	
-	delete myEngine;
+	delete engine;
 }
 
