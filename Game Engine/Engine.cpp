@@ -3,6 +3,8 @@
 #include <Windows.h>
 
 
+
+
 Engine::Engine()
 {
 	totalElapsedTimeLastFrame.Zero;
@@ -20,7 +22,7 @@ void Engine::Init()
 	engineClock.restart();
 
 	// Hide the default console window
-	::ShowWindow(::GetConsoleWindow(), SW_HIDE);
+	//::ShowWindow(::GetConsoleWindow(), SW_HIDE);
 
 	// Instantiate a Window class
 	if (window == nullptr)

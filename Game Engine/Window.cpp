@@ -1,4 +1,5 @@
 #include "Window.h"
+#include "Engine.h"
 
 Window::Window()
 {
@@ -13,6 +14,9 @@ void Window::Tick(float elapsedTime)
 	{
 		// "close requested" event: we close the window
 		if (event.type == sf::Event::Closed)
+		{
 			window.close();
+			GetEngine()->Exit();
+		}
 	}
 }

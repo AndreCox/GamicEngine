@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Engine.h"
 #include <SFML/Window.hpp>
 
 #define DEFAULT_RESOLUTION 600, 600
@@ -10,8 +9,6 @@ class Window
 {
 private:
 	sf::Window window;
-
-	
 
 public: 
 	Window();

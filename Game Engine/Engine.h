@@ -5,7 +5,7 @@
 
 class Engine;
 
-
+Engine* GetEngine();
 
 class Engine
 {
@@ -31,3 +31,4 @@ protected:
 	virtual void Tick(float elapsedTime);
 
 };
+
