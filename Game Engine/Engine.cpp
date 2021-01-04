@@ -7,17 +7,22 @@
 
 Engine::Engine()
 {
-	totalElapsedTimeLastFrame.Zero;
-	window = nullptr;
+	// Sets default values
+	renderer = nullptr;
+	bHasBeenPreviouslyInitialized = false;
 }
 
 Engine::~Engine()
 {
-	delete window;
+	delete renderer;
 }
 
 void Engine::Init()
 {
+	// Check if this is a duplicate call to Init().  If it is, don't call the function (it can only be called once)
+	if (bHasBeenPreviouslyInitialized == true)
+		return;
+
 	// Start the clock to track the time the engine has been running
 	engineClock.restart();
 
@@ -25,28 +30,36 @@ void Engine::Init()
 	//::ShowWindow(::GetConsoleWindow(), SW_HIDE);
 
 	// Instantiate a Window class
-	if (window == nullptr)
-		window = new Window{};
+	if (renderer == nullptr)
+		renderer = new Renderer{};
+
 
 	// Start the engine 
 	bEngineRunning = true;
+	float previousTotalElapsedTime{ 0 };
 	while (bEngineRunning)
 	{
 		// Call the tick function, and pass the elapsed time since last frame
-		Tick((engineClock.getElapsedTime() - totalElapsedTimeLastFrame).asSeconds());
+		float totalElapsedTime = engineClock.getElapsedTime().asSeconds();
+		Tick(totalElapsedTime - previousTotalElapsedTime);
 
 		// Set this so that wthe next frame can reference this frame's elapsed time
-		totalElapsedTimeLastFrame = engineClock.getElapsedTime();
+		previousTotalElapsedTime = totalElapsedTime;
 	}
 }
 
 void Engine::Tick(float elapsedTime)
 {
 	// Call tick on the window subframework
-	window->Tick(elapsedTime);
+	renderer->Tick(elapsedTime);
 }
 
 void Engine::Exit()
 {
 	bEngineRunning = false;
+}
+
+float Engine::getTotalElapsedTime()
+{
+	return engineClock.getElapsedTime().asSeconds();
 }
