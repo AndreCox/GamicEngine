@@ -1,9 +1,12 @@
 #include "Window.h"
 #include "Engine.h"
+#include <string>
 
 Window::Window()
 {
-	window.create(sf::VideoMode(DEFAULT_RESOLUTION), DEFAULT_WINDOW_TITLE, sf::Style::Default);
+	sf::ContextSettings context_settings;
+	context_settings.antialiasingLevel = 8;
+	window.create(sf::VideoMode(DEFAULT_RESOLUTION), DEFAULT_WINDOW_TITLE, sf::Style::Default, context_settings);
 }
 
 void Window::Tick(float elapsedTime)
@@ -19,4 +22,11 @@ void Window::Tick(float elapsedTime)
 			GetEngine()->Exit();
 		}
 	}
+
+	window.clear(sf::Color(0, 20, 50, 255));
+
+	window.display();
+	
+	// Set the window title to display the fps
+	window.setTitle(std::to_string(1.f / elapsedTime));
 }
