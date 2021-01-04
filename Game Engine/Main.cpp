@@ -5,6 +5,8 @@
 #include <SFML/Graphics.hpp>
 #include <gl/GLU.h>
 #include "spdlog/spdlog.h"
+#include <SFML/Graphics/Sprite.hpp>
+
 
 ////////////////////////////////////////////////////////////
 /// Entry point of application

@@ -11,6 +11,9 @@ Renderer::Renderer()
 
 void Renderer::Tick(float elapsedTime)
 {
+	// Set the window title to display the fps
+	renderer.setTitle(std::to_string(1.f / elapsedTime));
+
 	// check all the window's events that were triggered since the last tick
 	sf::Event event;
 	while (renderer.pollEvent(event))
@@ -23,10 +26,12 @@ void Renderer::Tick(float elapsedTime)
 		}
 	}
 
+	// Set the background
 	renderer.clear(sf::Color(0, 20, 50, 255));
+
+	// Draw the scene
 
 	renderer.display();
 	
-	// Set the window title to display the fps
-	renderer.setTitle(std::to_string(1.f / elapsedTime));
+	
 }
