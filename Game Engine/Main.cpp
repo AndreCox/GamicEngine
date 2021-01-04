@@ -6,6 +6,7 @@
 #include <gl/GLU.h>
 #include "spdlog/spdlog.h"
 #include "MediaHandler.h"
+#include <SFML/Graphics/Sprite.hpp>
 
 ////////////////////////////////////////////////////////////
 /// Entry point of application
