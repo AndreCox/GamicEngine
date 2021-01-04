@@ -25,9 +25,9 @@ int main()
 	spdlog::info("Starting!");
 	
 	MediaHandler testimg;
-	testimg.location = "GameData/images/";
-	testimg.filename = "testimg.png";
-	testimg.loadmedia();
+	testimg.location = "GameData/images/"; //set location of image files
+	testimg.filename = "testimg.png";   //set the filename to load
+	testimg.loadmedia(); //call the loadmedia to load the file
 
 	if (engine == nullptr)
 		engine = { new Engine };
