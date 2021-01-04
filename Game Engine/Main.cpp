@@ -24,7 +24,7 @@ int main()
 	spdlog::info("Starting!");
 	
 	MediaHandler testimg;
-	testimg.location = "/GameData/";
+	testimg.location = "GameData/images/";
 	testimg.filename = "testimg.png";
 	testimg.loadmedia();
 
