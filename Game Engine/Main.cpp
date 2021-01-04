@@ -30,6 +30,7 @@ int main()
 	bool rotate = true;
 	float angle;
 
+	// Hello!
 	// Start game loop
 	while (App.isOpen())
 	{
