@@ -1,50 +1,118 @@
-
-#include "TriangleShape.h"
+#include <SFML/Window.hpp>
+#include <SFML/OpenGL.hpp>
 #include <SFML/Graphics.hpp>
-#include <Windows.h>
+#include <gl/GLU.h>
 
+////////////////////////////////////////////////////////////
+/// Entry point of application
+////////////////////////////////////////////////////////////
 int main()
 {
-	// Hides the console window from popping up
-	::ShowWindow(::GetConsoleWindow(), 0);
+	// Create the main window
+	sf::RenderWindow App(sf::VideoMode(800, 600, 32), "SFML OpenGL");
 
-	// Enables anti-aliasing for smoother geometry
-	sf::ContextSettings settings;
-	settings.antialiasingLevel = 8;
+	// Create a clock for measuring time elapsed
+	sf::Clock Clock;
 
-	// Creates the graphics window
-	sf::RenderWindow window(sf::VideoMode(600, 600), "SFML works!", sf::Style::Default, settings);
+	//prepare OpenGL surface for HSR
+	glClearDepth(1.f);
+	glClearColor(0.3f, 0.3f, 0.3f, 0.f);
+	glEnable(GL_DEPTH_TEST);
+	glDepthMask(GL_TRUE);
 
-	// First parameter is radius, the second is the number of sides in the circle
-	sf::CircleShape shape(300.f, 100);
+	//// Setup a perspective projection & Camera position
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluPerspective(90.f, 1.f, 1.f, 300.0f);//fov, aspect, zNear, zFar
 
-	shape.setFillColor(sf::Color::Blue);
 
 
-	// Triangle shape
-	TriangleShape triangle;
+	bool rotate = true;
+	float angle;
 
-	triangle.setPoint(0, sf::Vector2f(100.f, 50.f));
-	triangle.setPoint(1, sf::Vector2f(50.f, 150.f));
-	triangle.setPoint(2, sf::Vector2f(150.f, 150.f));
-
-	sf::Color clearColor(0, 20, 50, 255);
-
-	while (window.isOpen())
+	// Start game loop
+	while (App.isOpen())
 	{
-		//window.setTitle(("mystring %));
-
-		sf::Event event;
-		while (window.pollEvent(event))
+		// Process events
+		sf::Event Event;
+		while (App.pollEvent(Event))
 		{
-			if (event.type == sf::Event::Closed)
-				window.close();
+			// Close window : exit
+			if (Event.type == sf::Event::Closed)
+				App.close();
+
+			// Escape key : exit
+			if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Escape))
+				App.close();
+
+			if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::A)) {
+				rotate = !rotate;
+			}
+
 		}
-	
-		window.clear(clearColor);
-		window.draw(triangle);
-		window.display();
+
+		//Prepare for drawing
+		// Clear color and depth buffer
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		// Apply some transformations for the cube
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+		glTranslatef(0.f, 0.f, -200.f);
+
+		if (rotate) {
+			angle = Clock.getElapsedTime().asSeconds();
+		}
+		glRotatef(angle * 50, 1.f, 0.f, 0.f);
+		glRotatef(angle * 30, 0.f, 1.f, 0.f);
+		glRotatef(angle * 90, 0.f, 0.f, 1.f);
+
+
+
+		//Draw a cube
+		glBegin(GL_QUADS);//draw some squares
+		glColor3i(0, 1, 1);
+		glVertex3f(-50.f, -50.f, -50.f);
+		glVertex3f(-50.f, 50.f, -50.f);
+		glVertex3f(50.f, 50.f, -50.f);
+		glVertex3f(50.f, -50.f, -50.f);
+
+		glColor3f(0, 0, 1);
+		glVertex3f(-50.f, -50.f, 50.f);
+		glVertex3f(-50.f, 50.f, 50.f);
+		glVertex3f(50.f, 50.f, 50.f);
+		glVertex3f(50.f, -50.f, 50.f);
+
+		glColor3f(1, 0, 1);
+		glVertex3f(-50.f, -50.f, -50.f);
+		glVertex3f(-50.f, 50.f, -50.f);
+		glVertex3f(-50.f, 50.f, 50.f);
+		glVertex3f(-50.f, -50.f, 50.f);
+
+		glColor3f(0, 1, 0);
+		glVertex3f(50.f, -50.f, -50.f);
+		glVertex3f(50.f, 50.f, -50.f);
+		glVertex3f(50.f, 50.f, 50.f);
+		glVertex3f(50.f, -50.f, 50.f);
+
+		glColor3f(1, 1, 0);
+		glVertex3f(-50.f, -50.f, 50.f);
+		glVertex3f(-50.f, -50.f, -50.f);
+		glVertex3f(50.f, -50.f, -50.f);
+		glVertex3f(50.f, -50.f, 50.f);
+
+		glColor3f(1, 0, 0);
+		glVertex3f(-50.f, 50.f, 50.f);
+		glVertex3f(-50.f, 50.f, -50.f);
+		glVertex3f(50.f, 50.f, -50.f);
+		glVertex3f(50.f, 50.f, 50.f);
+
+		glEnd();
+
+		// Finally, display rendered frame on screen
+		App.display();
 	}
 
-	return 0;
+	return EXIT_SUCCESS;
 }
+
