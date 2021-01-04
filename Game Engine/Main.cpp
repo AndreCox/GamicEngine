@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include <gl/GLU.h>
 #include "spdlog/spdlog.h"
+#include "MediaHandler.h"
 
 ////////////////////////////////////////////////////////////
 /// Entry point of application
@@ -20,7 +21,12 @@ Engine* GetEngine()
 
 int main()
 {
-	spdlog::info("TEST");
+	spdlog::info("Starting!");
+	
+	MediaHandler testimg;
+	testimg.location = "/GameData/";
+	testimg.filename = "testimg.png";
+	testimg.loadmedia();
 
 	if (myEngine == nullptr)
 		myEngine = { new Engine };
