@@ -146,14 +146,14 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MediaHandler.cpp" />
     <ClCompile Include="Renderer.cpp" />
-    <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="AdvSprite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="MediaHandler.h" />
     <ClInclude Include="Renderer.h" />
-    <ClInclude Include="Tile.h" />
+    <ClInclude Include="AdvSprite.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

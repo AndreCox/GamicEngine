@@ -4,8 +4,9 @@
 
 // A tile is a sprite with position data
 
-class Tile : public sf::Sprite
+class AdvSprite : public sf::Sprite
 {
-	
+public:
+	int depth;
 };
 
