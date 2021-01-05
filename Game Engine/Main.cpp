@@ -8,10 +8,6 @@
 #include "MediaHandler.h"
 #include <SFML/Graphics/Sprite.hpp>
 
-////////////////////////////////////////////////////////////
-/// Entry point of application
-////////////////////////////////////////////////////////////
-
 // This is where we reference the instance of our Engine.  This is static so that it is only 
 // accessible in this code file.  Use GetEngine() for other files.
 static Engine* engine;
@@ -23,14 +19,16 @@ Engine* GetEngine()
 	return engine;
 }
 
+////////////////////////////////////////////////////////////
+/// Entry point of application
+////////////////////////////////////////////////////////////
+
 int main()
 {
 	spdlog::info("Starting!");
 	
 	MediaHandler testimg;
-	testimg.location = "GameData/images/"; //set location of image files
-	testimg.filename = "testimg.png";   //set the filename to load
-	testimg.loadmedia(); //call the loadmedia to load the file
+	testimg.loadtexture("GameData/Images/testimg.png"); //call the loadmedia to load the file
 	
 	// If there doesn't exist one already, create an instance of the Engine
 	if (engine == nullptr)

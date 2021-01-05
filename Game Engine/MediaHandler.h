@@ -1,16 +1,15 @@
 #pragma once
 #include <string>
 #include "SFML/Graphics.hpp"
+#include "SFML/Audio.hpp"
 class MediaHandler
 {
 public:
-	std::string location; //location of file
-	std::string filename; //file name of file
-	sf::Texture loadtexture(); //function called to load the media.
-private:
-	std::string path;
-	
-
-
+	sf::Texture loadtexture(std::string path); //function called to load textures.
+	sf::Font loadfont(std::string path); //function called to load fonts
+	sf::SoundBuffer loadsound(std::string path); //function called to load sound
+	//void pulldata(std::string path);
 };
+
+
 
