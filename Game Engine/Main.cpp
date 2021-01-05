@@ -27,7 +27,8 @@ int main()
 	MediaHandler testimg;
 	testimg.location = "GameData/images/"; //set location of image files
 	testimg.filename = "testimg.png";   //set the filename to load
-	testimg.loadmedia(); //call the loadmedia to load the file
+	sf::Sprite testsprite;
+	testsprite.setTexture(testimg.loadtexture());
 
 	if (engine == nullptr)
 		engine = { new Engine };
