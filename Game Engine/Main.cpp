@@ -12,9 +12,12 @@
 /// Entry point of application
 ////////////////////////////////////////////////////////////
 
-
+// This is where we reference the instance of our Engine.  This is static so that it is only 
+// accessible in this code file.  Use GetEngine() for other files.
 static Engine* engine;
 
+// Global function that gets the Engine instance.  All that is required to use this in any 
+// code is to #include Engine.h
 Engine* GetEngine()
 {
 	return engine;
@@ -27,14 +30,16 @@ int main()
 	MediaHandler testimg;
 	testimg.location = "GameData/images/"; //set location of image files
 	testimg.filename = "testimg.png";   //set the filename to load
-	sf::Sprite testsprite;
-	testsprite.setTexture(testimg.loadtexture());
-
+	testimg.loadmedia(); //call the loadmedia to load the file
+	
+	// If there doesn't exist one already, create an instance of the Engine
 	if (engine == nullptr)
 		engine = { new Engine };
-
+	
+	// Initialize the Engine
 	engine->Init();
 	
+	// Deallocates memory to Engine before we close down
 	delete engine;
 }
 
